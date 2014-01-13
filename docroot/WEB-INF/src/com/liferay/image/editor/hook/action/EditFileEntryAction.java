@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.struts.BaseStrutsPortletAction;
 import com.liferay.portal.kernel.struts.StrutsPortletAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.TempFileUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -107,48 +106,28 @@ public class EditFileEntryAction extends BaseStrutsPortletAction {
 
 		File imageFile = ActionUtil.getImageFromBlob(blob, extension);
 
-		FileEntry tempFileEntry = TempFileUtil.addTempFile(
-			fileEntry.getGroupId(), fileEntry.getUserId(),
-			fileEntry.getTitle() + fileEntry.getVersion(), _TEMP_FOLDER_NAME,
-			imageFile, mimeType);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
 
-		try {
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				actionRequest);
+		String sourceFileName = fileEntry.getTitle();
 
-			String sourceFileName = fileEntry.getTitle();
-
-			if (!sourceFileName.endsWith(extension)) {
-				sourceFileName.concat(extension);
-			}
-
-			fileEntry = DLAppServiceUtil.updateFileEntry(
-				fileEntryId, sourceFileName, mimeType, fileEntry.getTitle(),
-				fileEntry.getDescription(),
-				ActionUtil.getChangeLog(actionRequest), false, imageFile,
-				serviceContext);
-
-			AssetPublisherUtil.addAndStoreSelection(
-				actionRequest, DLFileEntry.class.getName(),
-				fileEntry.getFileEntryId(), -1);
-
-			AssetPublisherUtil.addRecentFolderId(
-				actionRequest, DLFileEntry.class.getName(),
-				fileEntry.getFolderId());
-
-			return;
+		if (!sourceFileName.endsWith(extension)) {
+			sourceFileName.concat(extension);
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (tempFileEntry != null) {
-				TempFileUtil.deleteTempFile(tempFileEntry.getFileEntryId());
-			}
-		}
+
+		fileEntry = DLAppServiceUtil.updateFileEntry(
+			fileEntryId, sourceFileName, mimeType, fileEntry.getTitle(),
+			fileEntry.getDescription(),
+			ActionUtil.getChangeLog(actionRequest), false, imageFile,
+			serviceContext);
+
+		AssetPublisherUtil.addAndStoreSelection(
+			actionRequest, DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), -1);
+
+		AssetPublisherUtil.addRecentFolderId(
+			actionRequest, DLFileEntry.class.getName(),
+			fileEntry.getFolderId());
 	}
-
-	private static final String _TEMP_FOLDER_NAME =
-		EditFileEntryAction.class.getName();
 
 }
