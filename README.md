@@ -1,8 +1,8 @@
-<h1>image-editor-hook</h1>
+<h1>Image Editor Hook</h1>
 
 <p>This hook enables you to edit .jpeg and .png files using the Liferay Document Library interface.</p>
 
-<p>It's using a new library for AlloyUI created by @ChemaBalsas.</p>
+<p>It's using a new library for AlloyUI created by @jbalsas.</p>
 
 <p>For modern browsers it uses HTML5 capabilities and flash as fallback for old browsers</p> 
 
