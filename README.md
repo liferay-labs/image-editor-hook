@@ -30,6 +30,16 @@
 	</li>
 </ul>
 
+<h2>License</h2>
+
+<p>This library, "Image Editor Hook", is free software ("Licensed Software"); you can redistribute it and/or modify it under the terms of the <a href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a> as published by the Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.</p>
+
+<p>This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; including but not limited to, the implied warranty of MERCHANTABILITY, NONINFRINGEMENT, or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.</p>
+
+<p>You should have received a copy of the <a href="http://www.gnu.org/licenses/lgpl-2.1.html">GNU Lesser General Public License</a> along with this library; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA</p>
+
+
+
 
 
 
